@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.14.0",
+    "libraryName": "spfx-online-hooks",
+    "libraryId": "f509013f-9e29-4616-bfbc-be5e155d5940",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "spfx-online-hooks",
+    "solutionShortDescription": "spfx-online-hooks description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
