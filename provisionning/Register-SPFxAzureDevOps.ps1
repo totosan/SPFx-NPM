@@ -1,0 +1,1 @@
+﻿Register-PnPAzureADApp -ApplicationName SPFx-AzureDevOps -Tenant oberigdev.sharepoint.com -OutPath . -DeviceLogin
