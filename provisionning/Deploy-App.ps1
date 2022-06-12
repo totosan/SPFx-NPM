@@ -7,14 +7,13 @@
 ## Author:          Andriy Chevychalov
 ## Editor:  
 ## Examples:
-##     .\Deploy-App.ps1 -Tenant '{GUID}' -TenantUrl Url -SiteRelativeUrl RelativeUrl -ClientId '{GUID}' -ClientCertificateName 'filename.pfx' -PackageFileName 'filename.sppkg' -Verbose
-##     .\Deploy-App.ps1 -Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose
+##     .\Deploy-App.ps1 -Tenant 'aec1b57d-7b0a-4eeb-979c-1a211621adce' -TenantUrl https://oberigdev.sharepoint.com -SiteRelativeUrl /sites/acdev -ClientId '{9179171b-abec-456c-84af-03305686c768}' -ClientCertificateName 'SPFx-AzureDevOpsV1.pfx' -PackageFileName 'spfx-online-hooks.sppkg' -Verbose
 ## 
 ## Bugs/Issues
 ##    https://github.com/pnp/PnP-PowerShell/issues/2181
 ##    https://www.koskila.net/how-to-fix-add-pnpapp-failing-with-an-access-denied-error/
 ##
-## Created on:      12/06/2022
+## Created on:      12/07/2020
 ## Product Version: 1.0
 ## Script Version:  1.0
 #########################################################################################
@@ -82,7 +81,7 @@ try
         ClientCertificateName = $ClientCertificateName
         PackageFileName = $PackageFileName
     }
-    $global:settings.ApplicationPath = "{0}\{1}" -f $global:settings.RootApplicationFolder, $global:settings.PackageFileName
+    $global:settings.ApplicationPath = "{0}/{1}" -f $global:settings.RootApplicationFolder, $global:settings.PackageFileName
 
     Write-Verbose ("Init environment...`n")
     Write-Verbose ($global:settings | Out-String)
@@ -93,11 +92,11 @@ try
     Write-Verbose ("Ensure PnP.PowerShell Module...`n")
 
     Find-Module -Name PnP.PowerShell | Install-Module -AllowClobber -Force -Verbose
-    Install-Module PnP.PowerShell -Force
-    Get-Module PnP.PowerShell
+    #Install-Module PnP.PowerShell -Force
+    #Get-Module PnP.PowerShell
 
     #Register-PnPAzureADApp -ApplicationName SPFx-AzureDevOpsV1 -Tenant:$global:settings.Tenant -OutPath . -DeviceLogin
-    $certificatePath = "{0}\{1}" -f $global:settings.RootApplicationFolder, $global:settings.ClientCertificateName
+    $certificatePath = "{0}/{1}" -f $global:settings.RootApplicationFolder, $global:settings.ClientCertificateName
 
     Write-Verbose ("Start provisioning with certificate [{0}]...`n" -f $certificatePath)
     
