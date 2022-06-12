@@ -92,8 +92,8 @@ try
     Write-Verbose ("Ensure PnP.PowerShell Module...`n")
 
     Find-Module -Name PnP.PowerShell | Install-Module -AllowClobber -Force -Verbose
-    #Install-Module PnP.PowerShell -Force
-    #Get-Module PnP.PowerShell
+    Install-Module PnP.PowerShell -Force
+    Get-Module PnP.PowerShell
 
     #Register-PnPAzureADApp -ApplicationName SPFx-AzureDevOpsV1 -Tenant:$global:settings.Tenant -OutPath . -DeviceLogin
     $certificatePath = "{0}/{1}" -f $global:settings.RootApplicationFolder, $global:settings.ClientCertificateName
