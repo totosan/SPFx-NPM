@@ -8,6 +8,7 @@
 ## Editor:  
 ## Examples:
 ##     .\Deploy-App.ps1 -Tenant '{GUID}' -TenantUrl Url -SiteRelativeUrl RelativeUrl -ClientId '{GUID}' -ClientCertificateName 'filename.pfx' -PackageFileName 'filename.sppkg' -Verbose
+##     .\Deploy-App.ps1 -Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose
 ## 
 ## Bugs/Issues
 ##    https://github.com/pnp/PnP-PowerShell/issues/2181
