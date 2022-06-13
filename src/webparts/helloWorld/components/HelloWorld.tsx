@@ -43,7 +43,7 @@ const HelloWorld: FC<IHelloWorldProps> = (props) => {
   return (
     <section className={`${styles.helloWorld}`}>
         <div className={styles.welcome}>
-          <h3>Welcome to SharePoint Framework (with React Hook)!</h3>
+          <h3>Welcome to SharePoint Framework (with React Hook [Version: {props.version}])!</h3>
           <div> Legacy page context: <pre>{JSON.stringify(wpContext.pageContext.legacyPageContext)}</pre> </div>
           <div> Web Part id: {webPartId} </div>
           <div> Login name: {ctx.loginName} </div>
