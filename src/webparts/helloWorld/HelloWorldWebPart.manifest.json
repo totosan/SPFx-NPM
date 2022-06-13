@@ -22,7 +22,7 @@
     "description": { "default": "HelloWorld description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "HelloWorld"
+      "description": "This my first webpart"
     }
   }]
 }

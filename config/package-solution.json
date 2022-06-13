@@ -1,40 +1,40 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
-  "solution": {
-    "name": "spfx-online-hooks-client-side-solution",
-    "id": "f509013f-9e29-4616-bfbc-be5e155d5940",
-    "version": "1.0.0.0",
-    "includeClientSideAssets": true,
-    "skipFeatureDeployment": true,
-    "isDomainIsolated": false,
-    "developer": {
-      "name": "",
-      "websiteUrl": "",
-      "privacyUrl": "",
-      "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.14.0"
+    "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+    "solution": {
+        "name": "spfx-online-hooks-client-side-solution",
+        "id": "f509013f-9e29-4616-bfbc-be5e155d5940",
+        "version": "0.0.4.0",
+        "includeClientSideAssets": true,
+        "skipFeatureDeployment": true,
+        "isDomainIsolated": false,
+        "developer": {
+            "name": "",
+            "websiteUrl": "",
+            "privacyUrl": "",
+            "termsOfUseUrl": "",
+            "mpnId": "Undefined-1.14.0"
+        },
+        "metadata": {
+            "shortDescription": {
+                "default": "spfx-online-hooks description"
+            },
+            "longDescription": {
+                "default": "spfx-online-hooks description"
+            },
+            "screenshotPaths": [],
+            "videoUrl": "",
+            "categories": []
+        },
+        "features": [
+            {
+                "title": "spfx-online-hooks Feature",
+                "description": "The feature that activates elements of the spfx-online-hooks solution.",
+                "id": "8e317e4a-d706-4ada-ab79-c45268429b94",
+                "version": "1.0.0.0"
+            }
+        ]
     },
-    "metadata": {
-      "shortDescription": {
-        "default": "spfx-online-hooks description"
-      },
-      "longDescription": {
-        "default": "spfx-online-hooks description"
-      },
-      "screenshotPaths": [],
-      "videoUrl": "",
-      "categories": []
-    },
-    "features": [
-      {
-        "title": "spfx-online-hooks Feature",
-        "description": "The feature that activates elements of the spfx-online-hooks solution.",
-        "id": "8e317e4a-d706-4ada-ab79-c45268429b94",
-        "version": "1.0.0.0"
-      }
-    ]
-  },
-  "paths": {
-    "zippedPackage": "solution/spfx-online-hooks.sppkg"
-  }
+    "paths": {
+        "zippedPackage": "solution/spfx-online-hooks.sppkg"
+    }
 }

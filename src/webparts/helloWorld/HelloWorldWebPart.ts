@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { Version } from '@microsoft/sp-core-library';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+
 
 import HelloWorld from './components/HelloWorld';
 import AppContext from '../../common/AppContext';
@@ -18,7 +18,10 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
       {
         value: this.context
       },
-      React.createElement(HelloWorld, { description: this.properties.description })
+      React.createElement(HelloWorld, { 
+        description: this.properties.description,
+        version: this.manifest.version
+      })
     );
 
     ReactDom.render(element, this.domElement);
@@ -26,9 +29,5 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
-  }
-
-  protected get dataVersion(): Version {
-    return Version.parse('1.0');
   }
 }
