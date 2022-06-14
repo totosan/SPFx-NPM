@@ -107,7 +107,7 @@ try
     $site = Get-PnPSite 
     Write-Verbose ("Connection was created successfully, ({0})...`n" -f $site.Url)
 
-    if (($global:settings.SiteRelativeUrl.lehgtn > 1) -and (-not $global:settings.SiteRelativeUrl -ceq '/'))
+    if (($global:settings.SiteRelativeUrl.lehgtn = 1) -and (-not $global:settings.SiteRelativeUrl -ceq '/'))
     {
 
         Write-Verbose ("To deploy & install the app {0} on a site use the below script...`n" -f $global:settings.ApplicationPath)
