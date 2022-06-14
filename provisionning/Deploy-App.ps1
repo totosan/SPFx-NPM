@@ -107,16 +107,15 @@ try
     $site = Get-PnPSite 
     Write-Verbose ("Connection was created successfully, ({0})...`n" -f $site.Url)
 
-    if (($global:settings.SiteRelativeUrl.lehgtn = 1) -and (-not $global:settings.SiteRelativeUrl -ceq '/'))
+    if ($global:settings.SiteRelativeUrl -ceq '/')
     {
-
-        Write-Verbose ("To deploy & install the app {0} on a site use the below script...`n" -f $global:settings.ApplicationPath)
-        Add-PnPApp -Path $global:settings.ApplicationPath -Scope Site -Publish -Overwrite
+	    Write-Verbose "To deploy & install the app on a tenant level...`n"
+        Add-PnPApp -Path $global:settings.ApplicationPath -Overwrite:$true -Publish
     }
     else
     {
-        Write-Verbose "To deploy & install the app on a tenant level...`n"
-        Add-PnPApp -Path $global:settings.ApplicationPath -Overwrite:$true -Publish
+        Write-Verbose ("To deploy & install the app {0} on a site use the below script...`n" -f $global:settings.ApplicationPath)
+        Add-PnPApp -Path $global:settings.ApplicationPath -Scope Site -Publish -Overwrite
     }
 
     #Write-Verbose "Publish will be taking care of the deploy and trust process.`n"
