@@ -1,8 +1,7 @@
 {
   "name": "spfx-online-hooks",
-  "version": "0.0.5",
-  "private": true,
-  "main": "lib/index.js",
+  "version": "0.0.7",
+   "main": "lib/index.js",
   "scripts": {
     "build": "gulp bundle",
     "clean": "gulp clean",
