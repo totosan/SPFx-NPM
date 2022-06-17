@@ -7,6 +7,9 @@ import { IHelloWorldProps } from './IHelloWorldProps';
 import { useWebPartContext } from '../../../hooks/useWebPartContext';
 import { MSGraphClientFactory } from '@microsoft/sp-http';
 
+//import * as s from 'spfx-npm-repository'
+//import { formatNowFullDate } from 'spfx-npm-repository';
+
 const HelloWorld: FC<IHelloWorldProps> = (props) => {
   const [name, setName] = React.useState('');
   /*
@@ -30,6 +33,7 @@ const HelloWorld: FC<IHelloWorldProps> = (props) => {
   React.useEffect(() => {
     async function process() {
       const client = await ctx.msGraphClientFactory.getClient();
+      //const today = s.formatNowFullDate();
       client
         .api('/me')
         .get((error, user: any, rawResponse?: any) => {
@@ -65,3 +69,4 @@ const HelloWorld: FC<IHelloWorldProps> = (props) => {
 };
 
 export default HelloWorld;
+
