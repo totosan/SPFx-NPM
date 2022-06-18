@@ -7,8 +7,7 @@ import { IHelloWorldProps } from './IHelloWorldProps';
 import { useWebPartContext } from '../../../hooks/useWebPartContext';
 import { MSGraphClientFactory } from '@microsoft/sp-http';
 
-//import * as s from 'spfx-npm-repository'
-//import { formatNowFullDate } from 'spfx-npm-repository';
+import { formatNowFullDate } from 'spfx-npm-repository';
 
 const HelloWorld: FC<IHelloWorldProps> = (props) => {
   const [name, setName] = React.useState('');
@@ -29,11 +28,13 @@ const HelloWorld: FC<IHelloWorldProps> = (props) => {
   // or just the whole context
   const wpContext = useWebPartContext();
 
+  const today = formatNowFullDate();
+
   // get data using ms graph:
   React.useEffect(() => {
     async function process() {
       const client = await ctx.msGraphClientFactory.getClient();
-      //const today = s.formatNowFullDate();
+      
       client
         .api('/me')
         .get((error, user: any, rawResponse?: any) => {
@@ -51,7 +52,7 @@ const HelloWorld: FC<IHelloWorldProps> = (props) => {
           <div> Legacy page context: <pre>{JSON.stringify(wpContext.pageContext.legacyPageContext)}</pre> </div>
           <div> Web Part id: {webPartId} </div>
           <div> Login name: {ctx.loginName} </div>
-          <div> User name: {name} </div>
+          <div> Today ({today}): {name} </div>
         </div>
         <div>
           <ul className={styles.links}>
