@@ -7,14 +7,14 @@ stages:
   - stage: build
     displayName: Build
     jobs:
+
     - job: Build
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+
       pool:
         name: 'Azure Pipelines'
       steps:
-        - task: CmdLine@2
-          inputs:
-            script: |
-              echo Hello world
+        - template: ./templates/azure-pipelines-build-template.yml
 
   - stage: DEV
     displayName: Deploy to DEV
@@ -23,7 +23,4 @@ stages:
       pool:
         name: 'Azure Pipelines'
       steps:
-        - task: CmdLine@2
-          inputs:
-            script: |
-              echo Hello world
+        - template: ./templates/azure-pipelines-deploy-template.yml
