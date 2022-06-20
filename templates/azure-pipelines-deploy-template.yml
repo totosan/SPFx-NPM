@@ -20,10 +20,11 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - checkout: none
-        - download: current
-          artifact: drop
-          patterns: '*.zip'
+        - task: DownloadBuildArtifacts@1
+          displayName: 'Download Build Artifacts'
+          inputs:
+            downloadType: specific
+            itemPattern: '**/*.zip'
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts files '
           inputs:
