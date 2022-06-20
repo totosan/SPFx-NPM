@@ -20,22 +20,21 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - task: DownloadBuildArtifacts@1
-          displayName: 'Download Build Artifacts'
+        - task: CopyFiles@2
+          displayName: 'Copy Files to: $(build.artifactsstagingdirectory)/drop'
           inputs:
-            downloadType: specific
-            itemPattern: '**/*.zip'
-            downloadPath: '$(Pipeline.Workspace)'
+            SourceFolder: '$(Agent.BuildDirectory)'
+            TargetFolder: '$(build.artifactsstagingdirectory)/drop'
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts  files '
           inputs:
-            destinationFolder: '$(Pipeline.Workspace)'
+            destinationFolder: '$(build.artifactsstagingdirectory)/drop'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
-            pathToSevenZipTool: '$(Pipeline.Workspace)/drop'
+            pathToSevenZipTool: '$(build.artifactsstagingdirectory)/drop'
         - task: PowerShell@2
           displayName: 'Deploy-App'
           inputs:
             targetType: filePath
-            filePath: '$(Pipeline.Workspace)/drop/Deploy-App.ps1'
+            filePath: '$(build.artifactsstagingdirectory)/drop/Deploy-App.ps1'
             arguments: '-Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose'
