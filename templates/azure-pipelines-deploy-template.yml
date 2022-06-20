@@ -1,0 +1,40 @@
+parameters:
+  # unique name of the job
+  job_name: deploy_sppkg
+  # friendly name of the job
+  display_name: Upload & deploy *.sppkg to SharePoint app catalog
+  # name of target environment deploying to
+  target_environment: ''
+  # app catalog scope (tenant|sitecollection)
+  m365cli_app_catalog_scope: 'tenant'
+  variable_group_name: ''
+jobs:
+- deployment: ${{ parameters.job_name }}
+  displayName: ${{ parameters.display_name }}
+  pool:
+    vmImage: 'ubuntu-latest'
+  environment: ${{ parameters.target_environment }}
+  variables:
+  - group: ${{parameters.variable_group_name}} 
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - task: CopyFiles@2
+          displayName: 'Copy Files to: $(build.artifactsstagingdirectory)'
+          inputs:
+            SourceFolder: '$(Agent.BuildDirectory)'
+            TargetFolder: '$(build.artifactsstagingdirectory)'
+        - task: ExtractFiles@1
+          displayName: 'Extract Artifacts  files '
+          inputs:
+            destinationFolder: '$(build.artifactsstagingdirectory)/drop'
+            cleanDestinationFolder: false
+            overwriteExistingFiles: true
+            pathToSevenZipTool: '$(build.artifactsstagingdirectory)/drop'
+        - task: PowerShell@2
+          displayName: 'Deploy-App'
+          inputs:
+            targetType: filePath
+            filePath: '$(build.artifactsstagingdirectory)/drop/Deploy-App.ps1'
+            arguments: '-Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose'

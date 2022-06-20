@@ -1,0 +1,41 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+stages:
+- stage: Build
+  dependsOn: []
+  jobs:
+    - job: Build
+      pool:
+        name: 'Azure Pipelines'
+      steps:
+        - template: ./templates/azure-pipelines-build-template.yml
+ 
+- stage: DEV
+  displayName: Deploy to m365_DEV
+  jobs:
+    - template: ./templates/azure-pipelines-deploy-template.yml
+      parameters:
+        job_name: deploy_solution
+        target_environment: 'm365_DEV'
+        variable_group_name: m365_DEV_Configuration
+
+- stage: QA
+  displayName: Deploy to m365_QA
+  jobs:
+    - template: ./templates/azure-pipelines-deploy-template.yml
+      parameters:
+        job_name: deploy_qa_solution
+        target_environment: 'm365_QA'
+        variable_group_name: m365_QA_Configuration
+
+- stage: PROD
+  displayName: Deploy to m365_PROD
+  jobs:
+    - template: ./templates/azure-pipelines-deploy-template.yml
+      parameters:
+        job_name: deploy_prod_solution
+        target_environment: 'm365_PROD'
+        variable_group_name: m365_PROD_Configuration
