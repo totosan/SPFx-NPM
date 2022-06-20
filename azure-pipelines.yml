@@ -21,3 +21,12 @@ stages:
         job_name: deploy_solution
         target_environment: 'm365_DEV'
         variable_group_name: m365_DEV_Configuration
+
+- stage: QA
+  displayName: Deploy to m365_QA
+  jobs:
+    - template: ./templates/azure-pipelines-deploy-template.yml
+      parameters:
+        job_name: deploy_qa_solution
+        target_environment: 'm365_QA'
+        variable_group_name: m365_QA_Configuration
