@@ -21,17 +21,17 @@ jobs:
       deploy:
         steps:
         - task: CopyFiles@2
-          displayName: 'Copy Files to: $(build.artifactsstagingdirectory)/drop'
+          displayName: 'Copy Files to: $(build.artifactsstagingdirectory)'
           inputs:
             SourceFolder: '$(Agent.BuildDirectory)'
-            TargetFolder: '$(build.artifactsstagingdirectory)/drop'
+            TargetFolder: '$(build.artifactsstagingdirectory)'
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts  files '
           inputs:
-            destinationFolder: '$(build.artifactsstagingdirectory)/drop'
+            destinationFolder: '$(build.artifactsstagingdirectory)'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
-            pathToSevenZipTool: '$(build.artifactsstagingdirectory)/drop'
+            pathToSevenZipTool: '$(build.artifactsstagingdirectory)'
         - task: PowerShell@2
           displayName: 'Deploy-App'
           inputs:
