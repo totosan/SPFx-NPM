@@ -28,10 +28,10 @@ jobs:
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts  files '
           inputs:
-            destinationFolder: '$(build.artifactsstagingdirectory)'
+            destinationFolder: '$(build.artifactsstagingdirectory)/drop'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
-            pathToSevenZipTool: '$(build.artifactsstagingdirectory)'
+            pathToSevenZipTool: '$(build.artifactsstagingdirectory)/drop'
         - task: PowerShell@2
           displayName: 'Deploy-App'
           inputs:
