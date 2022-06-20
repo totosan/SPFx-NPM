@@ -1,20 +1,48 @@
-name: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
-resources:
-- repo: self
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - '*'
+    exclude:
+      - '**/*.yml'
+      - '**/*.yaml'
+
+pool:
+  name: default
+
+variables:
+  - group: spo-dev-var-group
+  - group: spo-prod-var-group
+  - name: node_version
+    value: '14.x'
+  - name: package_manager
+    value: 'npm'
+  - name: working_directory
+    value: '.'
 
 stages:
-  - stage: build
-    displayName: build
-    jobs:
-      - template: ./templates/azure-pipelines-build-template.yml
-        parameters:
-          name: 'buildsolution'
-  - stage: 'DEV'
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-    jobs:
-      - template: ./templates/azure-pipelines-deploy-template.yml
-        parameters:
-          job_name: deploy_solution
-          target_environment: 'DEV'
-          variable_group_name: DEV_Configuration
+- stage: Build
+  dependsOn: []
+  jobs:
+    - template: ./templates/azure-pipelines-build-template.yml
+      parameters:
+        working_directory: ${{ variables.working_directory }}
+        package_manager: ${{ variables.package_manager }}
+        node_version: ${{ variables.node_version }}
 
+- stage: DEV
+  dependsOn:
+    - Build
+  jobs:
+    - template: ./templates/azure-pipelines-deploy-template.yml
+      parameters:
+        display_name: Deploy to DEV
+        target_environment: DEV
+        node_version: ${{ variables.node_version }}
