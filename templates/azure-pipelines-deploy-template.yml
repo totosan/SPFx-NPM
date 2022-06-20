@@ -25,15 +25,15 @@ jobs:
           artifact: drop
           patterns: '*.zip'
         - task: ExtractFiles@1
-          displayName: 'Extract Artifacts  files '
+          displayName: 'Extract Artifacts files '
           inputs:
-            destinationFolder: '$(System.DefaultWorkingDirectory)/_Trainings-Spfx-OnLine-Hooks-Node-Gulp-CI/drop'
+            destinationFolder: 'drop'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
-            pathToSevenZipTool: '$(System.DefaultWorkingDirectory)/_Trainings-Spfx-OnLine-Hooks-Node-Gulp-CI/drop'
+            pathToSevenZipTool: 'drop'
         - task: PowerShell@2
           displayName: 'Deploy-App'
           inputs:
             targetType: filePath
-            filePath: './$(System.DefaultWorkingDirectory)/_Trainings-Spfx-OnLine-Hooks-Node-Gulp-CI/drop/Deploy-App.ps1'
+            filePath: './drop/Deploy-App.ps1'
             arguments: '-Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose'
