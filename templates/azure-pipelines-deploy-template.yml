@@ -23,7 +23,7 @@ jobs:
         - checkout: none
         - download: current
           artifact: drop
-          patterns: '**/*.'
+          patterns: '*.zip'
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts  files '
           inputs:
