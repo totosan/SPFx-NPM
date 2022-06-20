@@ -1,0 +1,65 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: NodeTool@0
+    displayName: 'Use Node 14.x'
+    inputs:
+      versionSpec: 14.x
+
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+
+  - task: CopyFiles@2
+    displayName: 'Copy PS Scripts to: $(build.artifactsstagingdirectory)/drop'
+    inputs:
+      SourceFolder: provisionning
+      Contents: '**/*.*'
+      TargetFolder: '$(build.artifactsstagingdirectory)/drop'
+      CleanTargetFolder: true
+      OverWrite: true
+
+  - task: gulp@0
+    displayName: 'gulp version-sync'
+    inputs:
+      targets: 'version-sync'
+
+  - task: gulp@0
+    displayName: 'gulp bundle --ship'
+    inputs:
+      targets: bundle
+      arguments: '--ship'
+
+  - task: gulp@0
+    displayName: 'gulp package-solution --ship'
+    inputs:
+      targets: 'package-solution'
+      arguments: '--ship'
+
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactsstagingdirectory)/drop'
+    inputs:
+      Contents: '**/*.sppkg'
+      TargetFolder: '$(build.artifactsstagingdirectory)/drop'
+      OverWrite: true
+      flattenFolders: true
+
+  - task: ArchiveFiles@2
+    displayName: 'Archive files'
+    inputs:
+      rootFolderOrFile: '$(build.artifactsstagingdirectory)/drop'
+      includeRootFolder: false
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifacts: drop'
+
