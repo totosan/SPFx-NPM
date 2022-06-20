@@ -13,4 +13,11 @@ stages:
       steps:
         - template: ./templates/azure-pipelines-build-template.yml
  
-      
+- stage: DEV
+  displayName: Deploy to DEV
+  jobs:
+    - template: ./templates/azure-pipelines-deploy-template.yml
+      parameters:
+        job_name: deploy_solution
+        target_environment: 'DEV'
+        variable_group_name: DEV_Configuration
