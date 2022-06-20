@@ -23,7 +23,7 @@ jobs:
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts  files '
           inputs:
-            destinationFolder: '$(Build.StagingDirectory)/drop'
+            destinationFolder: '$(Agent.BuildDirectory)/drop'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
             pathToSevenZipTool: '$(Build.StagingDirectory)/drop'
