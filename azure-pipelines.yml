@@ -15,7 +15,7 @@ trigger:
       - '**/*.yaml'
 
 pool:
-  name: default
+  name: 'Azure Pipelines'
 
 variables:
   - group: m365-dev-var-group
