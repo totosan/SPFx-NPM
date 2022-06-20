@@ -23,13 +23,13 @@ jobs:
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts  files '
           inputs:
-            destinationFolder: '$(System.ArtifactsDirectory)/drop'
+            destinationFolder: '$(Build.StagingDirectory)/drop'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
-            pathToSevenZipTool: '$(System.ArtifactsDirectory)/drop'
+            pathToSevenZipTool: '$(Build.StagingDirectory)/drop'
         - task: PowerShell@2
           displayName: 'Deploy-App'
           inputs:
             targetType: filePath
-            filePath: '$(System.ArtifactsDirectory)/drop/Deploy-App.ps1'
+            filePath: '$(Build.StagingDirectory)/drop/Deploy-App.ps1'
             arguments: '-Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose'
