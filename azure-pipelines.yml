@@ -14,10 +14,10 @@ stages:
         - template: ./templates/azure-pipelines-build-template.yml
  
 - stage: DEV
-  displayName: Deploy to DEV
+  displayName: Deploy to m365_DEV
   jobs:
     - template: ./templates/azure-pipelines-deploy-template.yml
       parameters:
         job_name: deploy_solution
-        target_environment: 'DEV'
+        target_environment: 'm365_DEV'
         variable_group_name: m365_DEV_Configuration
