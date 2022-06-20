@@ -2,12 +2,6 @@ name: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)
 resources:
 - repo: self
 
-trigger:
-  branches:
-    include:
-    - master
-    - develop
-
 stages:
   - stage: build
     displayName: build
