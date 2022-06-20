@@ -23,4 +23,17 @@ jobs:
         - checkout: none
         - download: current
           artifact: drop
-          patterns: '**/*.sppkg'
+          patterns: '**/*.'
+        - task: ExtractFiles@1
+          displayName: 'Extract Artifacts  files '
+          inputs:
+            destinationFolder: '$(System.DefaultWorkingDirectory)/_Trainings-Spfx-OnLine-Hooks-Node-Gulp-CI/drop'
+            cleanDestinationFolder: false
+            overwriteExistingFiles: true
+            pathToSevenZipTool: '$(System.DefaultWorkingDirectory)/_Trainings-Spfx-OnLine-Hooks-Node-Gulp-CI/drop'
+        - task: PowerShell@2
+          displayName: 'Deploy-App'
+          inputs:
+            targetType: filePath
+            filePath: './$(System.DefaultWorkingDirectory)/_Trainings-Spfx-OnLine-Hooks-Node-Gulp-CI/drop/Deploy-App.ps1'
+            arguments: '-Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose'
