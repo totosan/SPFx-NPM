@@ -4,7 +4,13 @@
 # https://aka.ms/yaml
 
 stages:
-  - stage: Build
-  - template:  ./templates/azure-pipelines-build-template.yml
+- stage: Build
+  dependsOn: []
+  jobs:
+    - job: Build
+      pool:
+        name: 'Azure Pipelines'
+      steps:
+        - template: ./templates/azure-pipelines-build-template.yml
  
       
