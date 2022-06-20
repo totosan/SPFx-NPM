@@ -4,17 +4,7 @@
 # https://aka.ms/yaml
 
 stages:
-  - stage: build
-    displayName: Build
-    jobs:
-
-    - job: Build
-      steps:
-        - template: ./templates/azure-pipelines-build-template.yml
-
-  - stage: DEV
-    displayName: Deploy to DEV
-    jobs:
-    - job: DEV
-      steps:
-        - template: ./templates/azure-pipelines-deploy-template.yml
+  - stage: Build
+  - template:  ./templates/azure-pipelines-build-template.yml
+ 
+      
