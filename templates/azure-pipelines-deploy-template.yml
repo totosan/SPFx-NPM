@@ -26,13 +26,15 @@ jobs:
             downloadType: specific
             itemPattern: '**/*.zip'
         - task: ExtractFiles@1
-          displayName: 'Extract Artifacts files '
+          displayName: 'Extract Artifacts  files '
           inputs:
+            destinationFolder: '$(System.ArtifactsDirectory)/drop'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
+            pathToSevenZipTool: '$(System.ArtifactsDirectory)/drop'
         - task: PowerShell@2
           displayName: 'Deploy-App'
           inputs:
             targetType: filePath
-            filePath: './drop/Deploy-App.ps1'
+            filePath: '$(System.ArtifactsDirectory)/drop/Deploy-App.ps1'
             arguments: '-Tenant $(Tenant) -TenantUrl $(TenantUrl) -SiteRelativeUrl $(SiteRelativeUrl) -ClientId $(ClientId) -ClientCertificateName $(ClientCertificateName) -PackageFileName $(PackageFileName) -Verbose'
