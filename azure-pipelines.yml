@@ -3,16 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-variables:
-  - group: m365-dev-var-group
-  - group: m365-prod-var-group
-  - name: node_version
-    value: '14.x'
-  - name: package_manager
-    value: 'npm'
-  - name: working_directory
-    value: '.'
-
 stages:
 - stage: Build
   dependsOn: []
