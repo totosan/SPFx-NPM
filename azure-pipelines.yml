@@ -20,4 +20,4 @@ stages:
       parameters:
         job_name: deploy_solution
         target_environment: 'DEV'
-        variable_group_name: DEV_Configuration
+        variable_group_name: m365_DEV_Configuration
