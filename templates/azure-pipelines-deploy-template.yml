@@ -1,0 +1,26 @@
+parameters:
+  # unique name of the job
+  job_name: deploy_sppkg
+  # friendly name of the job
+  display_name: Upload & deploy *.sppkg to SharePoint app catalog
+  # name of target environment deploying to
+  target_environment: ''
+  # app catalog scope (tenant|sitecollection)
+  m365cli_app_catalog_scope: 'tenant'
+  variable_group_name: ''
+jobs:
+- deployment: ${{ parameters.job_name }}
+  displayName: ${{ parameters.display_name }}
+  pool:
+    vmImage: 'ubuntu-latest'
+  environment: ${{ parameters.target_environment }}
+  variables:
+  - group: ${{parameters.variable_group_name}} #m365_user_login, m365_user_password, m365_app_catalog_site_url
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: none
+        - download: current
+          artifact: drop
+          patterns: '**/*.sppkg'
