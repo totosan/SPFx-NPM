@@ -4,20 +4,26 @@
 # https://aka.ms/yaml
 
 stages:
-- stage: Build
-  dependsOn: []
-  jobs:
-    - template: ./templates/azure-pipelines-build-template.yml
-      parameters:
-        working_directory: ${{ variables.working_directory }}
-        package_manager: ${{ variables.package_manager }}
-        node_version: ${{ variables.node_version }}
+  - stage: build
+    displayName: Build
+    jobs:
+    - job: Build
+      pool:
+        name: 'Azure Pipelines'
+      steps:
+        - task: CmdLine@2
+          inputs:
+            script: |
+              echo Hello world
 
-- stage: DEV
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-  jobs:
-    - template: ./templates/azure-pipelines-deploy-template.yml
-      parameters:
-        display_name: DEV
-        target_environment: DEV
-        node_version: ${{ variables.node_version }}
+  - stage: DEV
+    displayName: Deploy to DEV
+    jobs:
+    - job: DEV
+      pool:
+        name: 'Azure Pipelines'
+      steps:
+        - task: CmdLine@2
+          inputs:
+            script: |
+              echo Hello world
