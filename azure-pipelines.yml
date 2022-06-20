@@ -3,20 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - '*'
-    exclude:
-      - '**/*.yml'
-      - '**/*.yaml'
-
-pool:
-  name: 'Azure Pipelines'
-
 variables:
   - group: m365-dev-var-group
   - group: m365-prod-var-group
