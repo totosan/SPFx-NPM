@@ -38,8 +38,7 @@ stages:
         node_version: ${{ variables.node_version }}
 
 - stage: DEV
-  dependsOn:
-    - Build
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs:
     - template: ./templates/azure-pipelines-deploy-template.yml
       parameters:
