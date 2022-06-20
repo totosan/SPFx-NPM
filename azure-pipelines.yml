@@ -15,6 +15,7 @@ stages:
     - template: ./templates/azure-pipelines-build-template.yml
       parameters:
         name: 'buildsolution'
+        
 - stage: 'DEV'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs:
