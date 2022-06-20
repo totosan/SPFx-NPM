@@ -27,10 +27,8 @@ jobs:
         - task: ExtractFiles@1
           displayName: 'Extract Artifacts files '
           inputs:
-            destinationFolder: 'drop'
             cleanDestinationFolder: false
             overwriteExistingFiles: true
-            pathToSevenZipTool: 'drop'
         - task: PowerShell@2
           displayName: 'Deploy-App'
           inputs:
